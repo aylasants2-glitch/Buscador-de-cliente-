@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscador de Clientes</title>
+    <!-- Agora o CSS está na mesma pasta -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>🔍 Buscador de Clientes</h1>
+        <p>Encontre negócios que precisam de um site.</p>
+    </header>
+
+    <main>
+        <section class="search-box">
+            <input type="text" id="cidade" name="cidade" placeholder="Cidade (ex: São Paulo)" value="São Paulo">
+            
+            <select id="segmento" name="segmento">
+                <option value="restaurant">Restaurantes</option>
+                <option value="barber">Barbearias</option>
+                <option value="shop">Lojas</option>
+                <option value="car_repair">Oficinas</option>
+                <option value="cafe">Cafés/Lanchonetes</option>
+            </select>
+            
+            <button id="btn-buscar" onclick="buscarEmpresas()">Buscar Empresas</button>
+        </section>
+
+        <section class="dashboard">
+            <h3>Seu Progresso</h3>
+            <div class="stats-grid">
+                <div class="stat-card"><span id="stat-total">0</span><small>Salvos</small></div>
+                <div class="stat-card"><span id="stat-contatados">0</span><small>Contatados</small></div>
+                <div class="stat-card"><span id="stat-clientes">0</span><small>Clientes</small></div>
+            </div>
+        </section>
+
+        <section id="resultados">
+            <p class="empty-msg">Digite uma cidade e clique em buscar.</p>
+        </section>
+        
+        <section id="salvos-area" style="display:none;">
+            <h3>📁 Meus Contatos Salvos</h3>
+            <div id="lista-salvos"></div>
+            <button class="btn-danger" onclick="limparTudo()">Apagar Todos os Dados</button>
+        </section>
+    </main>
+
+    <!-- Agora o JS está na mesma pasta -->
+    <script src="script.js"></script>
+</body>
+</html>
