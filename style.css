@@ -1,0 +1,68 @@
+:root { --ouro: #d4af37; --ouro-escuro: #aa8c2c; --preto: #0a0a0a; --cinza: #121212; --branco: #f8f9fa; --texto: #b0b0b0; --vermelho: #dc2626; --verde: #16a34a; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background-color: var(--preto); color: var(--branco); font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
+
+.botao-secreto { position: fixed; top: 0; left: 0; width: 50px; height: 50px; z-index: 3000; cursor: pointer; }
+
+#painel-admin { display: none; position: fixed; bottom: 100px; right: 20px; background: white; color: black; padding: 20px; border-radius: 10px; box-shadow: 0 0 30px rgba(0,0,0,0.8); z-index: 2000; width: 300px; }
+#painel-admin h4 { margin-bottom: 10px; font-family: 'Cinzel'; }
+#painel-admin button { width: 100%; padding: 10px; margin-top: 10px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; }
+.btn-ativar { background: var(--verde); color: white; }
+.btn-desativar { background: var(--vermelho); color: white; }
+
+header { position: fixed; top: 0; width: 100%; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; background: rgba(10, 10, 10, 0.85); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(212, 175, 55, 0.2); z-index: 1000; }
+.logo { font-family: 'Cinzel', serif; font-size: 1.2rem; font-weight: 700; color: var(--ouro); letter-spacing: 2px; }
+.btn-agendar { background: transparent; color: var(--ouro); border: 1px solid var(--ouro); padding: 10px 20px; border-radius: 4px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; text-transform: uppercase; font-size: 0.8rem; }
+.btn-agendar:hover { background: var(--ouro); color: var(--preto); }
+
+.hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: linear-gradient(rgba(10, 10, 10, 0.6), rgba(10, 10, 10, 0.8)), url('imagens/IMG-20261030-WA0043.jpg') center/cover; padding: 20px; }
+.hero h1 { font-family: 'Cinzel', serif; font-size: 3.5rem; font-weight: 900; color: var(--ouro); text-shadow: 0 0 20px rgba(212, 175, 55, 0.4); margin-bottom: 20px; line-height: 1.2; }
+.hero .subtitulo { font-size: 1.2rem; color: #e0e0e0; max-width: 650px; margin-bottom: 40px; font-weight: 300; line-height: 1.6; }
+.hero .btn-principal { background: linear-gradient(135deg, var(--ouro), var(--ouro-escuro)); color: var(--preto); padding: 18px 40px; border-radius: 50px; font-size: 1.1rem; font-weight: 700; text-decoration: none; transition: transform 0.3s; box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3); text-transform: uppercase; }
+.hero .btn-principal:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(212, 175, 55, 0.5); }
+
+.secao { padding: 80px 20px; max-width: 1000px; margin: 0 auto; text-align: center; }
+.secao h2 { font-family: 'Cinzel', serif; font-size: 2.5rem; color: var(--ouro); margin-bottom: 20px; }
+.secao .descricao { color: var(--texto); font-size: 1.1rem; max-width: 700px; margin: 0 auto 50px auto; line-height: 1.6; }
+
+.selo-promo { background: var(--vermelho); color: white; text-align: center; padding: 15px; font-family: 'Cinzel', serif; font-size: 1.5rem; font-weight: 900; letter-spacing: 2px; border-radius: 8px; margin-bottom: 30px; box-shadow: 0 0 20px rgba(220, 38, 38, 0.5); text-transform: uppercase; animation: pulse 2s infinite; display: none; }
+@keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.02); } 100% { transform: scale(1); } }
+
+.promocoes-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 30px; }
+.promo-card { background: var(--cinza); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 12px; overflow: hidden; transition: transform 0.3s; }
+.promo-card:hover { transform: translateY(-10px); border-color: var(--ouro); box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2); }
+.promo-card img { width: 100%; display: block; object-fit: cover; }
+.promo-btn { display: block; background: #25D366; color: white; text-align: center; padding: 18px; text-decoration: none; font-weight: bold; text-transform: uppercase; font-size: 1.1rem; transition: background 0.3s; }
+.promo-btn:hover { background: #128C7E; }
+
+.tabela-valores { background: var(--cinza); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 12px; padding: 40px 30px; max-width: 600px; margin: 0 auto; text-align: left; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+.tabela-valores h3 { font-family: 'Cinzel', serif; color: var(--ouro); text-align: center; font-size: 1.5rem; margin-bottom: 30px; letter-spacing: 2px; }
+.linha-servico { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; font-size: 1.05rem; }
+.nome-servico { color: var(--branco); flex: 1; }
+.preco-normal { color: var(--ouro); font-weight: 700; font-size: 1.2rem; display: block; }
+.preco-promo { display: none; }
+.preco-antigo { color: #666; text-decoration: line-through; font-size: 0.9rem; margin-right: 10px; }
+.preco-novo { color: var(--ouro); font-weight: 700; font-size: 1.2rem; }
+.tag-off { background: var(--vermelho); color: white; font-size: 0.7rem; padding: 2px 6px; border-radius: 4px; font-weight: bold; margin-left: 5px; vertical-align: middle; display: none; }
+.divisor { height: 1px; background: rgba(212, 175, 55, 0.2); margin: 25px 0; }
+.aviso-orcamento { text-align: center; font-style: italic; color: var(--texto); font-size: 0.9rem; margin-top: 30px; line-height: 1.5; }
+
+.agendamento { background: var(--preto); position: relative; padding: 100px 20px; text-align: center; border-top: 1px solid rgba(212, 175, 55, 0.2); }
+.agendamento-content { position: relative; z-index: 2; max-width: 800px; margin: 0 auto; }
+.agendamento h2 { font-family: 'Cinzel', serif; font-size: 2.5rem; color: var(--ouro); margin-bottom: 20px; }
+.agendamento p { color: var(--texto); font-size: 1.1rem; margin-bottom: 40px; }
+.opcoes-agendamento { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+.opcao { background: var(--cinza); border: 1px solid var(--ouro); padding: 20px; border-radius: 10px; flex: 1; min-width: 250px; }
+.opcao h3 { color: var(--branco); font-size: 1.2rem; margin-bottom: 10px; }
+.opcao p { font-size: 0.9rem; margin-bottom: 20px; }
+.btn-agendar-opcao { background: var(--ouro); color: var(--preto); padding: 12px 30px; border-radius: 4px; font-weight: 700; text-decoration: none; display: inline-block; }
+
+footer { background: #050505; text-align: center; padding: 40px 20px; border-top: 1px solid rgba(212, 175, 55, 0.2); }
+footer p { color: #666; font-size: 0.9rem; margin-bottom: 10px; }
+.redes-sociais { display: flex; justify-content: center; gap: 15px; margin-bottom: 20px; }
+.redes-sociais a { color: var(--ouro); font-size: 1.2rem; text-decoration: none; }
+
+.whats-float { position: fixed; bottom: 30px; right: 30px; background: #25D366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 1.8rem; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4); z-index: 1000; text-decoration: none; transition: transform 0.3s; }
+.whats-float:hover { transform: scale(1.1); }
+
+@media (max-width: 768px) { .hero h1 { font-size: 2.5rem; } header { padding: 15px 20px; } .secao { padding: 60px 20px; } .secao h2 { font-size: 2rem; } .tabela-valores { padding: 25px 15px; } .linha-servico { flex-direction: column; align-items: flex-start; margin-bottom: 20px; border-bottom: 1px dashed rgba(255,255,255,0.1); padding-bottom: 10px; } }
