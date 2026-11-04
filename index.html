@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pai Igor de Omolu | Trabalhos Espirituais</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --ouro: #d4af37; --ouro-escuro: #aa8c2c; --preto: #0a0a0a; --cinza: #121212; --branco: #f8f9fa; --texto: #b0b0b0; --vermelho: #dc2626; --verde: #16a34a; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background-color: var(--preto); color: var(--branco); font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
+
+        /* BOTÃO ADMIN */
+        .btn-admin-teste { position: fixed; top: 10px; left: 10px; z-index: 9999; background: red; color: white; padding: 10px; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; }
+        
+        /* PAINEL ADMIN */
+        #painel-admin { display: none; position: fixed; top: 60px; left: 10px; z-index: 9999; background: white; color: black; padding: 20px; border-radius: 10px; box-shadow: 0 0 30px rgba(0,0,0,0.8); }
+        #painel-admin h4 { margin-bottom: 10px; font-family: 'Cinzel'; }
+        #painel-admin button { width: 100%; padding: 10px; margin-top: 10px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; }
+        .btn-ativar { background: var(--verde); color: white; }
+        .btn-desativar { background: var(--vermelho); color: white; }
+
+        header { position: fixed; top: 0; width: 100%; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; background: rgba(10, 10, 10, 0.85); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(212, 175, 55, 0.2); z-index: 1000; }
+        .logo { font-family: 'Cinzel', serif; font-size: 1.2rem; font-weight: 700; color: var(--ouro); letter-spacing: 2px; }
+        .btn-agendar { background: transparent; color: var(--ouro); border: 1px solid var(--ouro); padding: 10px 20px; border-radius: 4px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; text-transform: uppercase; font-size: 0.8rem; }
+        .btn-agendar:hover { background: var(--ouro); color: var(--preto); }
+
+        /* TOPO - AQUI ESTÁ A IMAGEM DA CAPA */
+        .hero { 
+            height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; 
+            background: linear-gradient(rgba(10, 10, 10, 0.6), rgba(10, 10, 10, 0.8)), url('imagens/IMG-20261030-WA0043.jpg') center/cover; 
+            padding: 20px; 
+        }
+        .hero h1 { font-family: 'Cinzel', serif; font-size: 3.5rem; font-weight: 900; color: var(--ouro); text-shadow: 0 0 20px rgba(212, 175, 55, 0.4); margin-bottom: 20px; line-height: 1.2; }
+        .hero .subtitulo { font-size: 1.2rem; color: #e0e0e0; max-width: 650px; margin-bottom: 40px; font-weight: 300; line-height: 1.6; }
+        .hero .btn-principal { background: linear-gradient(135deg, var(--ouro), var(--ouro-escuro)); color: var(--preto); padding: 18px 40px; border-radius: 50px; font-size: 1.1rem; font-weight: 700; text-decoration: none; transition: transform 0.3s; box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3); text-transform: uppercase; }
+        .hero .btn-principal:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(212, 175, 55, 0.5); }
+
+        .secao { padding: 80px 20px; max-width: 1000px; margin: 0 auto; text-align: center; }
+        .secao h2 { font-family: 'Cinzel', serif; font-size: 2.5rem; color: var(--ouro); margin-bottom: 20px; }
+        .secao .descricao { color: var(--texto); font-size: 1.1rem; max-width: 700px; margin: 0 auto 50px auto; line-height: 1.6; }
+
+        .selo-promo { background: var(--vermelho); color: white; text-align: center; padding: 15px; font-family: 'Cinzel', serif; font-size: 1.5rem; font-weight: 900; letter-spacing: 2px; border-radius: 8px; margin-bottom: 30px; box-shadow: 0 0 20px rgba(220, 38, 38, 0.5); text-transform: uppercase; animation: pulse 2s infinite; display: none; }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.02); } 100% { transform: scale(1); } }
+
+        .promocoes-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 30px; }
+        .promo-card { background: var(--cinza); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 12px; overflow: hidden; transition: transform 0.3s; }
+        .promo-card:hover { transform: translateY(-10px); border-color: var(--ouro); box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2); }
+        .promo-card img { width: 100%; display: block; object-fit: cover; }
+        .promo-btn { display: block; background: #25D366; color: white; text-align: center; padding: 18px; text-decoration: none; font-weight: bold; text-transform: uppercase; font-size: 1.1rem; transition: background 0.3s; }
+        .promo-btn:hover { background: #128C7E; }
+
+        .tabela-valores { background: var(--cinza); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 12px; padding: 40px 30px; max-width: 600px; margin: 0 auto; text-align: left; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .tabela-valores h3 { font-family: 'Cinzel', serif; color: var(--ouro); text-align: center; font-size: 1.5rem; margin-bottom: 30px; letter-spacing: 2px; }
+        .linha-servico { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; font-size: 1.05rem; }
+        .nome-servico { color: var(--branco); flex: 1; }
+        .preco-normal { color: var(--ouro); font-weight: 700; font-size: 1.2rem; display: block; }
+        .preco-promo { display: none; }
+        .preco-antigo { color: #666; text-decoration: line-through; font-size: 0.9rem; margin-right: 10px; }
+        .preco-novo { color: var(--ouro); font-weight: 700; font-size: 1.2rem; }
+        .tag-off { background: var(--vermelho); color: white; font-size: 0.7rem; padding: 2px 6px; border-radius: 4px; font-weight: bold; margin-left: 5px; vertical-align: middle; display: none; }
+        .divisor { height: 1px; background: rgba(212, 175, 55, 0.2); margin: 25px 0; }
+        .aviso-orcamento { text-align: center; font-style: italic; color: var(--texto); font-size: 0.9rem; margin-top: 30px; line-height: 1.5; }
+
+        .agendamento { background: var(--preto); position: relative; padding: 100px 20px; text-align: center; border-top: 1px solid rgba(212, 175, 55, 0.2); }
+        .agendamento-content { position: relative; z-index: 2; max-width: 800px; margin: 0 auto; }
+        .agendamento h2 { font-family: 'Cinzel', serif; font-size: 2.5rem; color: var(--ouro); margin-bottom: 20px; }
+        .agendamento p { color: var(--texto); font-size: 1.1rem; margin-bottom: 40px; }
+        .opcoes-agendamento { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+        .opcao { background: var(--cinza); border: 1px solid var(--ouro); padding: 20px; border-radius: 10px; flex: 1; min-width: 250px; }
+        .opcao h3 { color: var(--branco); font-size: 1.2rem; margin-bottom: 10px; }
+        .opcao p { font-size: 0.9rem; margin-bottom: 20px; }
+        .btn-agendar-opcao { background: var(--ouro); color: var(--preto); padding: 12px 30px; border-radius: 4px; font-weight: 700; text-decoration: none; display: inline-block; }
+
+        footer { background: #050505; text-align: center; padding: 40px 20px; border-top: 1px solid rgba(212, 175, 55, 0.2); }
+        footer p { color: #666; font-size: 0.9rem; margin-bottom: 10px; }
+        .redes-sociais { display: flex; justify-content: center; gap: 15px; margin-bottom: 20px; }
+        .redes-sociais a { color: var(--ouro); font-size: 1.2rem; text-decoration: none; }
+
+        .whats-float { position: fixed; bottom: 30px; right: 30px; background: #25D366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 1.8rem; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4); z-index: 1000; text-decoration: none; transition: transform 0.3s; }
+        .whats-float:hover { transform: scale(1.1); }
+
+        @media (max-width: 768px) { .hero h1 { font-size: 2.5rem; } header { padding: 15px 20px; } .secao { padding: 60px 20px; } .secao h2 { font-size: 2rem; } .tabela-valores { padding: 25px 15px; } .linha-servico { flex-direction: column; align-items: flex-start; margin-bottom: 20px; border-bottom: 1px dashed rgba(255,255,255,0.1); padding-bottom: 10px; } }
+    </style>
+</head>
+<body>
+
+    <!-- BOTÃO ADMIN -->
+    <button onclick="abrirPainel()" class="btn-admin-teste">ADMIN</button>
+
+    <!-- PAINEL ADMIN -->
+    <div id="painel-admin">
+        <h4>⚙️ Painel Oculto</h4>
+        <button class="btn-ativar" onclick="ativarPromo()">Ativar Black Friday (70% OFF)</button>
+        <button class="btn-desativar" onclick="desativarPromo()">Desativar Promoção</button>
+    </div>
+
+    <header>
+        <div class="logo">PAI IGOR DE OMOLU</div>
+        <a href="#agendamento" class="btn-agendar">Agendar Consulta</a>
+    </header>
+
+    <section class="hero">
+        <h1>Pai Igor de Omolu</h1>
+        <p class="subtitulo">"Sentindo que algo está travado? Sua vida financeira, amorosa ou espiritual precisa de um novo rumo? Eu posso te ajudar a abrir esses caminhos."</p>
+        <a href="https://wa.me/5517981261078?text=Ol%C3%A1%20Pai%20Igor!%20Gostaria%20de%20saber%20mais." class="btn-principal" target="_blank">Falar no WhatsApp</a>
+    </section>
+
+    <section class="secao" style="background: #050505; max-width: 100%;">
+        <div id="selo-promo" class="selo-promo">🔥 Black Friday da Macumba - 70% OFF 🔥</div>
+        
+        <h2>Promoções e Trabalhos Coletivos</h2>
+        <p class="descricao">Aproveite as condições especiais deste mês. Clique no cartaz para falar diretamente comigo e garantir sua vaga.</p>
+        
+        <div class="promocoes-grid">
+            <div class="promo-card">
+                <img src="imagens/IMG-20261030-WA0044.jpg" alt="Proteção">
+                <a href="https://wa.me/5517981261078?text=Ol%C3%A1%20Pai%20Igor!%20Quero%20garantir%20minha%20vaga." class="promo-btn" target="_blank">Garantir Vaga</a>
+            </div>
+            <div class="promo-card">
+                <img src="imagens/IMG-20261030-WA0045.jpg" alt="Adoçamento">
+                <a href="https://wa.me/5517981261078?text=Ol%C3%A1%20Pai%20Igor!%20Quero%20garantir%20minha%20vaga." class="promo-btn" target="_blank">Garantir Vaga</a>
+            </div>
+            <div class="promo-card">
+                <img src="imagens/IMG-20261030-WA0046.jpg" alt="Abertura">
+                <a href="https://wa.me/5517981261078?text=Ol%C3%A1%20Pai%20Igor!%20Quero%20garantir%20minha%20vaga." class="promo-btn" target="_blank">Garantir Vaga</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="secao">
+        <h2>Tabela de Valores</h2>
+        <p class="descricao">"Não deixe a dúvida ou a negatividade tomar conta."</p>
+        
+        <div class="tabela-valores">
+            <div class="linha-servico"><span class="nome-servico">Amarração <span class="tag-off">-70%</span></span><div><span class="preco-normal">R$ 4.800,00</span><div class="preco-promo"><span class="preco-antigo">R$ 4.800</span> <span class="preco-novo">R$ 1.440,00</span></div></div></div>
+            <div class="linha-servico"><span class="nome-servico">Quebra de Laço <span class="tag-off">-70%</span></span><div><span class="preco-normal">R$ 1.900,00</span><div class="preco-promo"><span class="preco-antigo">R$ 1.900</span> <span class="preco-novo">R$ 570,00</span></div></div></div>
+            <div class="linha-servico"><span class="nome-servico">Obsessão <span class="tag-off">-70%</span></span><div><span class="preco-normal">R$ 2.200,00</span><div class="preco-promo"><span class="preco-antigo">R$ 2.200</span> <span class="preco-novo">R$ 660,00</span></div></div></div>
+            <div class="linha-servico"><span class="nome-servico">Adoçamento <span class="tag-off">-70%</span></span><div><span class="preco-normal">R$ 2.900,00</span><div class="preco-promo"><span class="preco-antigo">R$ 2.900</span> <span class="preco-novo">R$ 870,00</span></div></div></div>
+            <div class="linha-servico"><span class="nome-servico">Atrativo <span class="tag-off">-70%</span></span><div><span class="preco-normal">R$ 3.800,00</span><div class="preco-promo"><span class="preco-antigo">R$ 3.800</span> <span class="preco-novo">R$ 1.140,00</span></div></div></div>
+            <div class="linha-servico"><span class="nome-servico">União de Laço <span class="tag-off">-70%</span></span><div><span class="preco-normal">R$ 2.700,00</span><div class="preco-promo"><span class="preco-antigo">R$ 2.700</span> <span class="preco-novo">R$ 810,00</span></div></div></div>
+            <div class="linha-servico"><span class="nome-servico">Chora aos meus pés <span class="tag-off">-70%</span></span><div><span class="preco-normal">R$ 2.700,00</span><div class="preco-promo"><span class="preco-antigo">R$ 2.700</span> <span class="preco-novo">R$ 810,00</span></div></div></div>
+            <div class="divisor"></div>
+            <div class="linha-servico"><span class="nome-servico">Quebra de orgulho <span class="tag-off">-70%</span></span><div><span class="preco-normal">R$ 2.300,00</span><div class="preco-promo"><span class="preco-antigo">R$ 2.300</span> <span class="preco-novo">R$ 690,00</span></div></div></div>
+            <div class="linha-servico"><span class="nome-servico">Vira pensamento <span class="tag-off">-70%</span></span><div><span class="preco-normal">R$ 2.700,00</span><div class="preco-promo"><span class="preco-antigo">R$ 2.700</span> <span class="preco-novo">R$ 810,00</span></div></div></div>
+            <div class="linha-servico"><span class="nome-servico">Azaramento <span class="tag-off">-70%</span></span><div><span class="preco-normal">R$ 2.000,00</span><div class="preco-promo"><span class="preco-antigo">R$ 2.000</span> <span class="preco-novo">R$ 600,00</span></div></div></div>
+            <div class="linha-servico"><span class="nome-servico">Brochamento <span class="tag-off">-70%</span></span><div><span class="preco-normal">R$ 2.200,00</span><div class="preco-promo"><span class="preco-antigo">R$ 2.200</span> <span class="preco-novo">R$ 660,00</span></div></div></div>
+            <div class="linha-servico"><span class="nome-servico">Afastamento de rival <span class="tag-off">-70%</span></span><div><span class="preco-normal">R$ 2.500,00</span><div class="preco-promo"><span class="preco-antigo">R$ 2.500</span> <span class="preco-novo">R$ 750,00</span></div></div></div>
+            <div class="linha-servico"><span class="nome-servico">Desmancha feitiços <span class="tag-off">-70%</span></span><div><span class="preco-normal">R$ 2.900,00</span><div class="preco-promo"><span class="preco-antigo">R$ 2.900</span> <span class="preco-novo">R$ 870,00</span></div></div></div>
+            <div class="divisor"></div>
+            <div class="linha-servico"><span class="nome-servico">Calmaria <span class="tag-off">-70%</span></span><div><span class="preco-normal">R$ 2.000,00</span><div class="preco-promo"><span class="preco-antigo">R$ 2.000</span> <span class="preco-novo">R$ 600,00</span></div></div></div>
+            <div class="linha-servico"><span class="nome-servico">Quebra olho gordo/inveja <span class="tag-off">-70%</span></span><div><span class="preco-normal">R$ 2.000,00</span><div class="preco-promo"><span class="preco-antigo">R$ 2.000</span> <span class="preco-novo">R$ 600,00</span></div></div></div>
+            <div class="linha-servico"><span class="nome-servico">Proteção <span class="tag-off">-70%</span></span><div><span class="preco-normal">R$ 3.900,00</span><div class="preco-promo"><span class="preco-antigo">R$ 3.900</span> <span class="preco-novo">R$ 1.170,00</span></div></div></div>
+            <div class="linha-servico"><span class="nome-servico">Abertura de caminhos <span class="tag-off">-70%</span></span><div><span class="preco-normal">R$ 3.400,00</span><div class="preco-promo"><span class="preco-antigo">R$ 3.400</span> <span class="preco-novo">R$ 1.020,00</span></div></div></div>
+            <p class="aviso-orcamento">Demais ofertas e/ou rituais para orixás e/ou entidades favor fazer o seu orçamento.</p>
+        </div>
+    </section>
+
+    <section class="agendamento" id="agendamento">
+        <div class="agendamento-content">
+            <h2>O Seu Momento de Mudança é Agora</h2>
+            <p>"A distância não é barreira para a sua fé. Atendo presencialmente no terreiro ou online para você, de onde estiver."</p>
+            <div class="opcoes-agendamento">
+                <div class="opcao">
+                    <h3>📍 Presencial</h3>
+                    <p>Atendimento no meu espaço, com toda a energia e acolhimento do terreiro.</p>
+                    <a href="https://wa.me/5517981261078?text=Ol%C3%A1%20Pai%20Igor!%20Gostaria%20de%20agendar%20um%20atendimento%20PRESENCIAL." class="btn-agendar-opcao" target="_blank">Agendar Presencial</a>
+                </div>
+                <div class="opcao">
+                    <h3>💻 Online</h3>
+                    <p>Atendimento por videochamada, mantendo a mesma conexão e respeito.</p>
+                    <a href="https://wa.me/5517981261078?text=Ol%C3%A1%20Pai%20Igor!%20Gostaria%20de%20agendar%20um%20atendimento%20ONLINE." class="btn-agendar-opcao" target="_blank">Agendar Online</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="redes-sociais">
+            <a href="https://instagram.com" target="_blank">📸</a>
+            <a href="https://wa.me/5517981261078" target="_blank">📱</a>
+        </div>
+        <p>© 2024 Pai Igor de Omolu. Todos os direitos reservados.</p>
+        <p>Axé • Fé • Orientação • Respeito</p>
+        <p style="font-size: 0.8rem; margin-top: 20px; color: #444;">Site desenvolvido por <strong>Guilherme</strong></p>
+    </footer>
+
+    <a href="https://wa.me/5517981261078" class="whats-float" target="_blank">📱</a>
+
+    <script>
+        function abrirPainel() {
+            let painel = document.getElementById('painel-admin');
+            if (painel.style.display === 'block') {
+                painel.style.display = 'none';
+            } else {
+                painel.style.display = 'block';
+            }
+        }
+
+        function ativarPromo() {
+            document.getElementById('selo-promo').style.display = 'block';
+            let precoNormal = document.querySelectorAll('.preco-normal');
+            let precoPromo = document.querySelectorAll('.preco-promo');
+            let tagOff = document.querySelectorAll('.tag-off');
+            precoNormal.forEach(el => el.style.display = 'none');
+            precoPromo.forEach(el => el.style.display = 'block');
+            tagOff.forEach(el => el.style.display = 'inline-block');
+            localStorage.setItem('blackFridayAtiva', 'sim');
+            alert("🔥 Modo Black Friday ATIVADO!");
+        }
+
+        function desativarPromo() {
+            document.getElementById('selo-promo').style.display = 'none';
+            let precoNormal = document.querySelectorAll('.preco-normal');
+            let precoPromo = document.querySelectorAll('.preco-promo');
+            let tagOff = document.querySelectorAll('.tag-off');
+            precoNormal.forEach(el => el.style.display = 'block');
+            precoPromo.forEach(el => el.style.display = 'none');
+            tagOff.forEach(el => el.style.display = 'none');
+            localStorage.setItem('blackFridayAtiva', 'nao');
+            alert("Modo Promoção DESATIVADO.");
+        }
+
+        window.onload = function() {
+            if (localStorage.getItem('blackFridayAtiva') === 'sim') {
+                ativarPromo();
+            }
+        }
+    </script>
+</body>
+              </html>
